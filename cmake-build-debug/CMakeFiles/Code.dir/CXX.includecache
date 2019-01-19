@@ -1,0 +1,22 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+D:/Study/ACA/project2018/Code/subString.cpp
+iostream
+-
+string.h
+-
+vector
+-
+set
+-
+math.h
+-
+omp.h
+-
+
