@@ -6,7 +6,7 @@
 
 #IncludeRegexTransform: 
 
-D:/Study/ACA/project2018/Code/subString.cpp
+D:/Study/ACA/project2018/Code/subString_24.cpp
 iostream
 -
 string.h
@@ -18,5 +18,9 @@ set
 math.h
 -
 omp.h
+-
+stdio.h
+-
+stdlib.h
 -
 

@@ -122,32 +122,32 @@ Code/fast:
 	$(MAKE) -f CMakeFiles\Code.dir\build.make CMakeFiles/Code.dir/build
 .PHONY : Code/fast
 
-subString.obj: subString.cpp.obj
+subString_24.obj: subString_24.cpp.obj
 
-.PHONY : subString.obj
+.PHONY : subString_24.obj
 
 # target to build an object file
-subString.cpp.obj:
-	$(MAKE) -f CMakeFiles\Code.dir\build.make CMakeFiles/Code.dir/subString.cpp.obj
-.PHONY : subString.cpp.obj
+subString_24.cpp.obj:
+	$(MAKE) -f CMakeFiles\Code.dir\build.make CMakeFiles/Code.dir/subString_24.cpp.obj
+.PHONY : subString_24.cpp.obj
 
-subString.i: subString.cpp.i
+subString_24.i: subString_24.cpp.i
 
-.PHONY : subString.i
+.PHONY : subString_24.i
 
 # target to preprocess a source file
-subString.cpp.i:
-	$(MAKE) -f CMakeFiles\Code.dir\build.make CMakeFiles/Code.dir/subString.cpp.i
-.PHONY : subString.cpp.i
+subString_24.cpp.i:
+	$(MAKE) -f CMakeFiles\Code.dir\build.make CMakeFiles/Code.dir/subString_24.cpp.i
+.PHONY : subString_24.cpp.i
 
-subString.s: subString.cpp.s
+subString_24.s: subString_24.cpp.s
 
-.PHONY : subString.s
+.PHONY : subString_24.s
 
 # target to generate assembly for a file
-subString.cpp.s:
-	$(MAKE) -f CMakeFiles\Code.dir\build.make CMakeFiles/Code.dir/subString.cpp.s
-.PHONY : subString.cpp.s
+subString_24.cpp.s:
+	$(MAKE) -f CMakeFiles\Code.dir\build.make CMakeFiles/Code.dir/subString_24.cpp.s
+.PHONY : subString_24.cpp.s
 
 # Help Target
 help:
@@ -158,9 +158,9 @@ help:
 	@echo ... Code
 	@echo ... edit_cache
 	@echo ... rebuild_cache
-	@echo ... subString.obj
-	@echo ... subString.i
-	@echo ... subString.s
+	@echo ... subString_24.obj
+	@echo ... subString_24.i
+	@echo ... subString_24.s
 .PHONY : help
 
 

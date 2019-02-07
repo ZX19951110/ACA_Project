@@ -9,6 +9,8 @@
 #include <set>
 #include <math.h>
 #include <omp.h>
+#include <stdio.h>
+#include <stdlib.h>
 
 using namespace std;
 
@@ -107,8 +109,6 @@ double BruteForceParallel(int num_threads){
         {
             chunk = size1 / num_threads; // to allocate the size of chunk of static schedule
         }
-
-
 #pragma omp for schedule(static, chunk)
         for (int i = 0; i <= size1 - size2; i++) {
             int status = 1; //乐观锁
@@ -163,8 +163,8 @@ double BruteForceParallel(int num_threads){
     int match_hash = 0;
     int str_hash = 0;
     for (int i = 0; i < size2; i++) {
-        match_hash = (BASE * match_hash + match[i]) % mod;
-        str_hash = (BASE * str_hash + str[i]) % mod;
+        match_hash = (BASE * match_hash + match[i]) % mod;//the hash of the match string
+        str_hash = (BASE * str_hash + str[i]) % mod;//initialize the first hash of the rolling hash
     }
     for (int i = 0; i <= size1-size2; i++) {
         if (match_hash == str_hash && memcmp(match, str + i, size2) == 0) {
@@ -183,7 +183,11 @@ double BruteForceParallel(int num_threads){
     printf("RabinKarp algorithm without omp spend: %fs\n",time_spent);
     return time_spent;
  }
-
+/**
+ * this fuction use "section" to optimize the code, although in rolling hash the next hash is depend on this iteration, but if we divide the whole text into chunks and the number is the thread number, we can unroll the iteration and use parallel mode to execute with compute every initial value of first rolling hash value of the chunks.
+ * @param num_threads
+ * @return
+ */
  double RabinKarpParallel(int num_threads){
      omp_set_num_threads(num_threads);
      char* str;
@@ -255,45 +259,10 @@ double BruteForceParallel(int num_threads){
                      }
                  }
          }
+
 #pragma omp section
              {
                  int left = chunk * 1;
-                 int right = chunk * 2 - size2;
-                 for (int i = left; i < left + size2 - 1; i++)
-                     h = (h * BASE) % mod;
-                 for (int i = left; i < left + size2; i++) {
-                     str_hash = (BASE * str_hash + str[i]) % mod;
-                 }
-                 for (int i = left; i <= right; i++) {
-                     if (match_hash == str_hash && memcmp(match, str + i, size2) == 0) {
-                         RabinKarp2.insert(i);
-                     }
-                     else {
-                         str_hash = (BASE*(str_hash - h*str[i]) + str[i+size2]) % mod;
-                     }
-                 }
-             }
-#pragma omp section
-             {
-                 int left = chunk * 2;
-                 int right = chunk * 3 - size2;
-                 for (int i = left; i < left + size2 - 1; i++)
-                     h = (h * BASE) % mod;
-                 for (int i = left; i < left + size2; i++) {
-                     str_hash = (BASE * str_hash + str[i]) % mod;
-                 }
-                 for (int i = left; i <= right; i++) {
-                     if (match_hash == str_hash && memcmp(match, str + i, size2) == 0) {
-                         RabinKarp2.insert(i);
-                     }
-                     else {
-                         str_hash = (BASE*(str_hash - h*str[i]) + str[i+size2]) % mod;
-                     }
-                 }
-             }
-#pragma omp section
-             {
-                 int left = chunk * 3;
                  int right = size1 - size2;//for last chunk
                  for (int i = left; i < left + size2 - 1; i++)
                      h = (h * BASE) % mod;
@@ -321,7 +290,7 @@ double BruteForceParallel(int num_threads){
      return time_spent;
  }
 int main(){
-    int num_threads = 4;
+    int num_threads = 2;
     double time1 = BruteForce();
     double time2 = BruteForceParallel(num_threads);
     printf("the speedup of BruteForce with %d threads is %f\n", num_threads,time1/time2);
@@ -330,3 +299,4 @@ int main(){
     double time4 = RabinKarpParallel(num_threads);
     printf("the speedup of RabinKarp with %d threads is %f\n", num_threads,time3/time4);
 }
+//thank you for your reading :D
