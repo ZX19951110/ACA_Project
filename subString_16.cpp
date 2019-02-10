@@ -58,10 +58,10 @@ double BruteForce(){
     double end = omp_get_wtime();
     set<int>::iterator i = BruteForce1.begin();
     for(; i!=BruteForce1.end(); ++i) {
-        //printf("Index found is %d\n", *i);
+        printf("Index found is %d\n", *i);
     }
     double time_spent = end-start;
-    //printf("BruteForce algorithm without omp spend: %fs\n",time_spent);
+    printf("BruteForce algorithm without omp spend: %fs\n",time_spent);
     return time_spent;
 }
 /**
@@ -179,7 +179,7 @@ double BruteForceParallel(int num_threads){
     double end = omp_get_wtime();
     set<int>::iterator i = RabinKarp1.begin();
     for(; i!=RabinKarp1.end(); ++i) {
-        //printf("Index found is %d\n", *i);
+        printf("Index found is %d\n", *i);
     }
     double time_spent = end-start;
     printf("RabinKarp algorithm without omp spend: %fs\n",time_spent);
@@ -536,7 +536,7 @@ double BruteForceParallel(int num_threads){
      double end = omp_get_wtime();
      set<int>::iterator i = RabinKarp2.begin();
      for(; i!=RabinKarp2.end(); ++i) {
-         //printf("Index found is %d\n", *i);
+         printf("Index found is %d\n", *i);
      }
      double time_spent = end-start;
      printf("RabinKarp algorithm with omp task spend: %fs\n",time_spent);
