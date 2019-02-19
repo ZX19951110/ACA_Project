@@ -1,7 +1,7 @@
 /**
  * We use two algorithms to match substring of a long text and record the index
  * The first algorithm is Brute Force which time complexity is O(m * n), and we use "omp parallel for" to optimize the loop with static schedule, the chunk of the optimize is depend on the threads
- * The second algorithm is Rabin-Karp which time complexity is O(n) in the best situation, and O((m-n+1)n) in the worst situation, We try to use the "omp parallel task" to optimize the algorithm
+ * The second algorithm is Rabin-Karp which time complexity is O(m + n), We try to use the "omp parallel task" to optimize the algorithm
 */
 #include <iostream>
 #include <string.h>
